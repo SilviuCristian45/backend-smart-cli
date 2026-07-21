@@ -1,0 +1,13 @@
+[INFO] 2026-07-09T08:15:00+03:00 - Server started successfully { "port": 8080, "env": "production" }
+[INFO] 2026-07-09T08:16:12+03:00 - User successfully logged in { "userId": 44521, "ip": "192.168.1.10" }
+[INFO] 2026-07-09T08:20:05+03:00 - Cache warmed up { "itemsCached": 1500 }
+[WARN] 2026-07-09T09:45:02+03:00 - High memory usage detected { "memoryUsage": "85%", "threshold": "80%" }
+[INFO] 2026-07-09T09:50:00+03:00 - User requested password reset { "userId": 1023 }
+[ERROR] 2026-07-09T10:05:33+03:00 - Database connection timeout { "code": 504, "retryCount": 1 }
+[ERROR] 2026-07-09T10:06:10+03:00 - Database connection timeout { "code": 504, "retryCount": 2 }
+[ERROR] 2026-07-09T10:07:45+03:00 - Database connection timeout { "code": 504, "retryCount": 3 }
+[ERROR] 2026-07-09T10:10:01+03:00 - Unhandled promise rejection { "error": "NullPointerException", "service": "AuthService" }
+[INFO] 2026-07-09T10:15:20+03:00 - Background job finished { "jobId": "export-112", "durationMs": 450 }
+[WARN] 2026-07-09T11:02:14+03:00 - API rate limit approaching { "clientId": "app-ios-v2", "remaining": 10 }
+[ERROR] 2026-07-09T11:45:00+03:00 - Payment gateway timeout { "transactionId": "tx_998231", "gateway": "Stripe" }
+[INFO] 2026-07-09T12:00:00+03:00 - Daily report generated { "fileSizeMB": 12.4 }
