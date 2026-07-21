@@ -1,3 +1,4 @@
 dist/
 report.json
 node_modules/
+.env
