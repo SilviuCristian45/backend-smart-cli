@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Body,
   Controller,
   Get,
   Post,
@@ -11,6 +12,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { ApiResponse } from './utils/ApiResponse';
+import { randomUUID } from 'crypto'; // <-- Folosim modulul nativ Node.js
 
 @Controller()
 export class AppController {
@@ -40,21 +42,29 @@ export class AppController {
       },
       storage: diskStorage({
         destination: process.env.LOG_DEST ?? 'logs',
-        filename: (req, file, callback) => {
-          const ext = extname(file.originalname);
-          const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-          callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+        filename: (req, file, cb) => {
+          // 1. Generăm un ID unic: ex. "550e8400-e29b-41d4-a716-446655440000"
+          const uniqueId = randomUUID();
+
+          // 2. Extragem extensia originală: ex. ".log"
+          const extension = extname(file.originalname);
+
+          // 3. Lipim ID-ul de extensie: "550e8400-e29b-41d4-a716-446655440000.log"
+          cb(null, `${uniqueId}${extension}`);
         },
       }),
     }),
   )
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('clientId') clientId: string,
+  ) {
     if (!file) {
       ApiResponse.error('Nu ati specificat fisierul');
     }
     try {
       return ApiResponse.success(
-        await this.appService.generateLogsReportJson(file.path),
+        await this.appService.generateLogsReportJson(file.path, clientId),
       );
     } catch (err) {
       return ApiResponse.error('Eroare la generarea raportului');
