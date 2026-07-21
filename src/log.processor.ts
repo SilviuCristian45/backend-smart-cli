@@ -5,7 +5,6 @@ import * as readline from 'node:readline';
 import * as fs from 'node:fs';
 import { ReportLog } from './model/report-log';
 import { Log, LogType } from './model/log';
-import { InjectQueue } from '@nestjs/bullmq';
 import { EventEmitter } from 'node:stream';
 import { LogsGateway } from './logs.gateway';
 
